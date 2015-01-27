@@ -53,13 +53,12 @@ public class FileStoreConfig {
 		@Bean
 		public FileStorage pictureStorage() {
 			String applicationUrl = environment.getProperty("application.url");
-			LocalFileStorage pictureStorage = new LocalFileStorage(applicationUrl + "/resources/", resourceLoader.getResource("/resources/"));
-			pictureStorage.setDeleteOnExit(true);
+			LocalFileStorage pictureStorage = null;
 			return pictureStorage;
 		}
-		
+
 	}
-	
+
 	/**
 	 * S3.
 	 * @author Keith Donald
@@ -75,7 +74,7 @@ public class FileStoreConfig {
 		public FileStorage pictureStorage() {
 			return new S3FileStorage(environment.getProperty("s3.accessKey"), environment.getProperty("s3.secretKey"), "images.greenhouse.springsource.org");
 		}
-		
+
 	}
-	
+
 }

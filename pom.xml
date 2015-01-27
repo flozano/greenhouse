@@ -26,7 +26,7 @@
 		<org.springframework.social.linkedin-version>1.0.0.RC1</org.springframework.social.linkedin-version>
 		<org.springframework.social.tripit-version>1.0.0.M3</org.springframework.social.tripit-version>
 		<org.springframework.mobile-version>1.0.0.RELEASE</org.springframework.mobile-version>
-		<org.aspectj-version>1.6.11</org.aspectj-version>
+		<org.aspectj-version>1.8.4</org.aspectj-version>
 		<org.slf4j-version>1.6.2</org.slf4j-version>
 	</properties>
 	<dependencies>
@@ -239,25 +239,31 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
 			<scope>provided</scope>
-		</dependency>
+    </dependency>
+
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>jstl-api</artifactId>
-			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jstl-impl</artifactId>
 			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jsp-api</artifactId>
+					<groupId>javax.servlet.jsp</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Apache Tiles -->
@@ -320,7 +326,7 @@
 		<dependency>
 			<groupId>net.java.dev.jets3t</groupId>
 			<artifactId>jets3t</artifactId>
-			<!-- The next release of jets3t should have support for HttpComponents 
+			<!-- The next release of jets3t should have support for HttpComponents
 				4.1 and HttpClient 3.1 will be removed from the classpath -->
 			<version>0.8.1</version>
 			<exclusions>
@@ -495,7 +501,7 @@
 							<goal>write-active-profile-properties</goal>
 						</goals>
 						<configuration>
-							<!-- Writes properties defined in current active profile(s) to application.properties, 
+							<!-- Writes properties defined in current active profile(s) to application.properties,
 								which is picked up by PropertyPlaceholderConfigurer in the classpath -->
 							<outputFile>${project.build.outputDirectory}/application.properties</outputFile>
 						</configuration>
@@ -520,11 +526,11 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 			</plugin>
-			<!-- Tomcat 7 Plugin -->
+			<!-- Tomcat 8 Plugin -->
 			<plugin>
-				<groupId>com.googlecode.t7mp</groupId>
-				<artifactId>maven-t7-plugin</artifactId>
-				<version>0.9.9.M1</version>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
 					<contextPath>greenhouse</contextPath>
 				</configuration>
@@ -583,7 +589,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
